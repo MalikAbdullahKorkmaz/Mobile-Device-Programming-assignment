@@ -1,0 +1,33 @@
+# dependencies
+/node_modules
+/android/build
+/android/app/build
+/android/app/.cxx
+/android/app/.externalNativeBuild
+/ios/build
+/ios/Pods
+/ios/.xcode.env.local
+
+# misc
+.DS_Store
+.env
+.jest/
+.watchmanconfig
+coverage/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.gradle
+.idea
+.vscode
+!/android/gradle/wrapper/gradle-wrapper.jar
+
+# metro
+/metro-cache
+
+# temporary
+/tmp/*
+
+# react-native-debugger
+.rndebugger_config.json
