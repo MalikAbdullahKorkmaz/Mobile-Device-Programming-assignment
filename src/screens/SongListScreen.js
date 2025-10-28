@@ -5,33 +5,37 @@ const SongListScreen = () => {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Since the assignment specifies an external API for the song list,
-  // and no specific song API was provided, I will use a placeholder API.
-  // A common public music API is difficult to find.
-  // For demonstration, I will use a simple placeholder data structure.
-  // In a real-world scenario, a suitable API (like Spotify, iTunes, etc. with proper keys) would be used.
+  // Using the Ghibli API's locations endpoint as a placeholder for a song list,
+  // as a specific song API was not provided. The API structure is similar to the movie list.
   
-  // Placeholder data - replace with actual API call
+  
+  
+  
+
   useEffect(() => {
-    // Simulate API call delay
-    setTimeout(() => {
-      const placeholderSongs = [
-        { id: '1', title: 'Song Title 1', artist: 'Artist A', album: 'Album X' },
-        { id: '2', title: 'Song Title 2', artist: 'Artist B', album: 'Album Y' },
-        { id: '3', title: 'Song Title 3', artist: 'Artist A', album: 'Album Z' },
-        { id: '4', title: 'Song Title 4', artist: 'Artist C', album: 'Album X' },
-        { id: '5', title: 'Song Title 5', artist: 'Artist B', album: 'Album Y' },
-      ];
-      setSongs(placeholderSongs);
-      setLoading(false);
-    }, 1500);
+    fetch('https://ghibliapi.vercel.app/locations')
+      .then(response => response.json())
+      .then(data => {
+        // Renaming to 'songs' for consistency with the component's state
+        setSongs(data.map(item => ({
+          id: item.id,
+          title: item.name, // Using 'name' as 'title'
+          artist: item.climate, // Using 'climate' as 'artist'
+          album: item.terrain, // Using 'terrain' as 'album'
+        })));
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching songs/locations:', error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading Song List...</Text>
+        <Text>Loading Song List (Locations API)...</Text>
       </View>
     );
   }
@@ -39,8 +43,8 @@ const SongListScreen = () => {
   const renderItem = ({ item }) => (
     <View style={styles.item}>
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.artist}>Artist: {item.artist}</Text>
-      <Text style={styles.album}>Album: {item.album}</Text>
+      <Text style={styles.artist}>Climate: {item.artist}</Text>
+      <Text style={styles.album}>Terrain: {item.album}</Text>
     </View>
   );
 
