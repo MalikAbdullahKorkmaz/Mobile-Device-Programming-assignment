@@ -13,15 +13,15 @@ const SongListScreen = () => {
   
 
   useEffect(() => {
-    fetch('https://ghibliapi.vercel.app/locations')
+    fetch('https://69035dfdd0f10a340b23e7ba.mockapi.io/songlist/songs')
       .then(response => response.json())
       .then(data => {
         // Renaming to 'songs' for consistency with the component's state
         setSongs(data.map(item => ({
           id: item.id,
-          title: item.name, // Using 'name' as 'title'
-          artist: item.climate, // Using 'climate' as 'artist'
-          album: item.terrain, // Using 'terrain' as 'album'
+          title: item.title,
+          artist: item.artist,
+          album: item.album,
         })));
         setLoading(false);
       })
@@ -35,7 +35,7 @@ const SongListScreen = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading Song List (Locations API)...</Text>
+        <Text>Loading Song List (Custom MockAPI)...</Text>
       </View>
     );
   }
