@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1763052644837,
+      "tag": "0000_awesome_network",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1763052690436,
+      "tag": "0001_magenta_mauler",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1763053621163,
+      "tag": "0002_bouncy_vanisher",
+      "breakpoints": true
+    }
+  ]
+}

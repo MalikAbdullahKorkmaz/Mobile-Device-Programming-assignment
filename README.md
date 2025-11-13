@@ -1,97 +1,103 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# StudyPulse - Öğrenci Çalışma Takip Uygulaması
 
-# Getting Started
+Bu proje, öğrencilerin çalışma süreçlerini, ruh hallerini ve akademik materyallerini yönetmelerine yardımcı olmak için tasarlanmış kapsamlı bir çalışma takip uygulamasıdır.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Proje Özellikleri
 
-## Step 1: Start Metro
+StudyPulse, öğrencilerin verimli çalışmasını destekleyen bir dizi temel özellik sunar:
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+1.  **Liderlik Tablosu (Leaderboard):**
+    *   Kullanıcıların arkadaşlarıyla çalışma ilerlemelerini (toplam çalışma süresi, tamamlanan ödevler vb.) karşılaştırmalarını sağlar.
+    *   Sosyal motivasyonu artırır ve sağlıklı rekabet ortamı yaratır.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+2.  **Günlük Ruh Hali ve Odaklanma Anketi (Daily Survey):**
+    *   Kullanıcılara günlük ruh hali, odaklanma ve enerji seviyelerini sorarak stres takibi yapar.
+    *   Zaman içindeki duygusal ve zihinsel durumlarını takip etmelerine olanak tanır.
 
-```sh
-# Using npm
-npm start
+3.  **Ders Materyalleri Yönetimi (Study Materials):**
+    *   Öğrencilerin ders notlarını, PDF'lerini ve diğer çalışma materyallerini yükleyip düzenleyebileceği bir bölüm.
+    *   Materyalleri konu, etiket ve dosya türüne göre organize etme imkanı sunar.
 
-# OR using Yarn
-yarn start
-```
+4.  **Pomodoro Zamanlayıcısı:**
+    *   Odaklanmış çalışma seansları için Pomodoro tekniğini uygulayan bir zamanlayıcı.
 
-## Step 2: Build and run your app
+5.  **Ödev ve Sınav Takibi:**
+    *   Yaklaşan ödevleri ve sınavları takip etme, tamamlama durumlarını güncelleme.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## Kurulum ve Çalıştırma
 
-### Android
+Bu proje bir tam yığın (full-stack) web uygulamasıdır ve çalıştırmak için Node.js, pnpm ve bir MySQL veritabanı gerektirir.
 
-```sh
-# Using npm
-npm run android
+### Ön Koşullar
 
-# OR using Yarn
-yarn android
-```
+*   Node.js (v18+)
+*   pnpm
+*   MySQL Veritabanı
 
-### iOS
+### Adımlar
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+1.  **Depoyu Klonlayın:**
+    ```bash
+    git clone https://github.com/MalikAbdullahKorkmaz/Mobile-Device-Programming-assignment.git
+    cd Mobile-Device-Programming-assignment
+    ```
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+2.  **Bağımlılıkları Yükleyin:**
+    ```bash
+    pnpm install
+    ```
 
-```sh
-bundle install
-```
+3.  **Çevre Değişkenlerini Ayarlayın:**
+    Proje kök dizininde `.env` adında bir dosya oluşturun ve aşağıdaki değişkenleri kendi değerlerinizle doldurun:
+    ```
+    # Veritabanı bağlantı dizesi
+    DATABASE_URL="mysql://user:password@host:port/database_name"
+    
+    # Manus SDK ve OAuth için gerekli
+    MANUS_CLIENT_ID="your_manus_client_id"
+    MANUS_CLIENT_SECRET="your_manus_client_secret"
+    MANUS_REDIRECT_URI="http://localhost:3000/api/auth/callback"
+    
+    # S3 Depolama (Materyal yükleme için)
+    S3_ENDPOINT="your_s3_endpoint"
+    S3_ACCESS_KEY_ID="your_s3_access_key_id"
+    S3_SECRET_ACCESS_KEY="your_s3_secret_access_key"
+    S3_BUCKET_NAME="your_s3_bucket_name"
+    ```
 
-Then, and every time you update your native dependencies, run:
+4.  **Veritabanını Hazırlayın:**
+    Drizzle ORM kullanarak veritabanı şemasını uygulayın:
+    ```bash
+    pnpm run db:push
+    ```
 
-```sh
-bundle exec pod install
-```
+5.  **Uygulamayı Başlatın:**
+    Geliştirme sunucusunu başlatın:
+    ```bash
+    pnpm run dev
+    ```
+    Uygulama genellikle `http://localhost:3000` adresinde çalışacaktır.
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## Sunum İçin Öneriler
 
-```sh
-# Using npm
-npm run ios
+Bu projeyi hocanıza sunarken aşağıdaki noktalara odaklanmanız, projenin kapsamını ve değerini daha iyi vurgulayacaktır:
 
-# OR using Yarn
-yarn ios
-```
+1.  **Giriş ve Problem Tanımı:**
+    *   Projenin amacını (öğrenci verimliliğini ve refahını artırmak) açıklayın.
+    *   Geleneksel çalışma yöntemlerinin zorluklarından (odaklanma eksikliği, stres yönetimi, dağınık notlar) bahsedin.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+2.  **Temel Özelliklerin Demostrasyonu:**
+    *   **Yeni Eklenen Özellikler:**
+        *   **Liderlik Tablosu:** Arkadaşların ilerlemesini gösterme ve sosyal motivasyon yönünü vurgulayın.
+        *   **Günlük Anket:** Kullanıcının ruh hali ve odaklanma verilerini nasıl girdiğini ve bu verilerin stres takibi için nasıl kullanıldığını gösterin.
+        *   **Ders Materyalleri:** Bir dosya yükleme ve materyali etiketleme/düzenleme sürecini gösterin.
+    *   **Mevcut Özellikler:** Pomodoro zamanlayıcısı ve ödev takibi gibi mevcut özellikleri de kısaca gösterin.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+3.  **Teknik Mimari:**
+    *   Projenin **Full-Stack** bir uygulama olduğunu belirtin (React/TypeScript/Vite + Node.js/tRPC/MySQL).
+    *   **Veritabanı Şeması (Drizzle ORM):** `dailySurveys`, `studyMaterials` ve `leaderboard` için kullanılan tabloları ve ilişkileri açıklayın.
+    *   **API Katmanı (tRPC):** Tip güvenli bir API katmanı kullandığınızı ve bunun geliştirme sürecini nasıl hızlandırdığını belirtin.
 
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+4.  **Sonuç ve Gelecek Planları:**
+    *   Projenin mobil cihaz programlama dersi için bir mobil uygulama konsepti olarak tasarlandığını ve web teknolojileriyle prototiplendiğini açıklayın.
+    *   Gelecekteki geliştirme fikirlerinden (mobil uygulama entegrasyonu, daha gelişmiş analizler) bahsedin.
